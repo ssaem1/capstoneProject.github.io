@@ -98,13 +98,13 @@ header {
 } */
 
 /* TAB BAR CSS */
-.tab-bar {
+.tab {
   margin-top: 40px;
   display: flex;
   justify-content: center;
 }
 
-.tab-button {
+.tablinks {
   padding: 12px 24px;
   background-color: #f2f2f2;
   border: none;
@@ -113,15 +113,18 @@ header {
   cursor: pointer;
 }
 
-.tab-button:hover {
+.tablinks:hover {
   background-color: #ddd;
 }
 
-.tab-button.active {
+.tablinks.active {
   border-bottom-color: #333;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
+.tabcontent {
+  padding-top: 25px;
+}
 /* PROFILE LIST CSS */
 .profile-container {
   margin-top: 20px;
