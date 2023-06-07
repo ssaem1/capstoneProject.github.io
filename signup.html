@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/forms.css">
+    <script src="js/forms.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+          <h1>Website Title</h1>
+          <form class="search-form">
+            <input type="text" placeholder="Search...">
+            <!-- <button type="submit">Search</button> -->
+        </form>
+          <div class="buttons">
+            <a href="home.html"><button class="signup">Home</button></a>
+            <a href="login.html"><button class="login">Log In</button></a>
+          </div>
+        </div>
+    </header>  
+    <div class = "login-container"> 
+        <div class="login-square">
+            <h2>Sign Up</h2>
+            <form>
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" placeholder="Enter your first name">
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Enter your last name">
+              </div>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Biography</label>
+                <textarea type="biography" id="biography" name="biography" placeholder="Tell us about yourself"
+                 cols="43" rows="10"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="grade">Year:</label>
+                <div class="checkbox-group">
+                  <label for="year1"><input type="checkbox" id="year1" name="year[]" value="year1"> First</label>
+                  <label for="year2"><input type="checkbox" id="year2" name="year[]" value="year2"> Second</label>
+                  <label for="year3"><input type="checkbox" id="year3" name="year[]" value="year3"> Third</label>
+                  <label for="year4"><input type="checkbox" id="year4" name="year[]" value="year4"> Fourth</label>
+                  <label for="year5"><input type="checkbox" id="year5" name="year[]" value="year5"> Graduate</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="hobbies">Hobbies:</label>
+                <div class="checkbox-group">
+                  <label for="hobby1"><input type="checkbox" id="hobby1" name="hobbies[]" value="hobby1"> Draw</label>
+                  <label for="hobby2"><input type="checkbox" id="hobby2" name="hobbies[]" value="hobby2"> Music</label>
+                  <label for="hobby3"><input type="checkbox" id="hobby3" name="hobbies[]" value="hobby3"> Video Games</label>
+                  <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies[]" value="hobby4"> Movies</label>
+                  <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies[]" value="hobby5"> Cooking</label>
+                  <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies[]" value="hobby6"> Photography</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="clubs">Clubs:</label>
+                <div class="checkbox-group">
+                  <label for="club1"><input type="checkbox" id="club1" name="clubs[]" value="club1"> Coding</label>
+                  <label for="club2"><input type="checkbox" id="club2" name="clubs[]" value="club2"> Trivia</label>
+                  <label for="club3"><input type="checkbox" id="club3" name="clubs[]" value="club3"> LEO</label>
+                  <label for="club4"><input type="checkbox" id="club4" name="clubs[]" value="club4"> Red Cross</label>
+                  <label for="club5"><input type="checkbox" id="club5" name="clubs[]" value="club5"> Esports</label>
+                  <label for="club6"><input type="checkbox" id="club6" name="clubs[]" value="club6"> Science</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sports">Sports:</label>
+                <div class="checkbox-group">
+                  <label for="sport1"><input type="checkbox" id="sport1" name="sports[]" value="sport1"> Golf</label>
+                  <label for="sport2"><input type="checkbox" id="sport2" name="sports[]" value="sport2"> Tennis</label>
+                  <label for="sport3"><input type="checkbox" id="sport3" name="sports[]" value="sport3"> Badminton</label>
+                  <label for="sport4"><input type="checkbox" id="sport4" name="sports[]" value="sport4"> Track</label>
+                  <label for="sport5"><input type="checkbox" id="sport5" name="sports[]" value="sport5"> Swimming</label>
+                  <label for="sport6"><input type="checkbox" id="sport6" name="sports[]" value="sport6"> Hockey</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="socials">Social Media:</label>
+                <div class="socials-group">
+                  <label>
+                    <input type="checkbox" name="socials[]" value="socials 1" onchange="toggleInput(this)">
+                    Instagram
+                  </label>
+                  <div class="checkbox-input">
+                    <input type="text" id="socials-input" placeholder="" disabled>
+                  </div>
+                  <label>
+                    <input type="checkbox" name="socials[]" value="socials 2" onchange="toggleInput(this)">
+                    Facebook
+                  </label>
+                  <div class="checkbox-input">
+                    <input type="text" id="socials2-input" placeholder="" disabled>
+                  </div>
+                  <label>
+                    <input type="checkbox" name="socials[]" value="socials 3" onchange="toggleInput(this)">
+                    Discord
+                  </label>
+                  <div class="checkbox-input">
+                    <input type="text" id="socials-input" placeholder="" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit">Sign Up</button>
+              </div>
+            </form>
+          </div>
+    </div> 
+</body>
+</html>
