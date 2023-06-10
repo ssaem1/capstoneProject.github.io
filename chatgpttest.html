@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile Button</title>
+  <style>
+.profile-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  margin: 0px 20% 0px 20%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.profile-details{
+  /* display: grid;
+  grid-template-columns: 1fr; */
+  padding-left: 40px;
+}
+
+.profile:hover{
+  background-color: lightgrey;
+}
+
+.profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 20%;
+  margin-right: 10px;
+}
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #eee;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.8em;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  h2,
+  p{
+    margin: 5px;
+  }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile">
+      <img src="images/blue.png" alt="Profile Picture">
+      <div class="profile-details">
+          <h2>Name</h2>
+          <p>Short description</p>
+        <div class="tags">
+          <button class="tag">Tag 1</button>
+          <button class="tag">Tag 2</button>
+          <button class="tag">Tag 3</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
