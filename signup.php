@@ -17,7 +17,7 @@
             <!-- <button type="submit">Search</button> -->
         </form>
           <div class="buttons">
-            <a href="home.html"><button class="signup">Home</button></a>
+            <a href="index.html"><button class="signup">Home</button></a>
             <a href="login.html"><button class="login">Log In</button></a>
           </div>
         </div>
