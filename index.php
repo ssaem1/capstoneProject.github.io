@@ -1,8 +1,3 @@
-<?php
-  echo 'deez nuts';
-  ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +18,8 @@
             <!-- <button type="submit">Search</button> -->
         </form>
           <div class="buttons">
-            <a href="signup.html"><button class="signup">Sign Up</button></a>
-            <a href="login.html"><button class="login">Log In</button></a>
+            <a href="signup.php"><button class="signup">Sign Up</button></a>
+            <a href="login.php"><button class="login">Log In</button></a>
           </div>
         </div>
     </header>   

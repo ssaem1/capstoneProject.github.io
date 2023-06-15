@@ -1,3 +1,78 @@
+<?php
+  if(isset($_POST['submit'])){
+    if(empty($_POST['first-name'])){
+      echo "error, empty first name";
+    } else { 
+      $firstName = $_POST['first-name'];
+      if(!preg_match('/^[a-zA-Z\s]+$/', $firstName)){
+        echo 'first name must be letters and spaces only';
+      }
+    }
+
+    if(empty($_POST['last-name'])){
+      echo "error, empty last name";
+    } else { 
+      $lastName = $_POST['last-name'];
+      if(!preg_match('/^[a-zA-Z\s]+$/', $lastName)){
+        echo 'last name must be letters and spaces only';
+      }
+    }
+
+    if(empty($_POST['email'])){
+      echo "error, empty email";
+    } else { 
+      $email = $_POST ['email'];
+      if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        echo 'Email must be a valid email address';
+      }
+    }
+
+    if(empty($_POST['password'])){
+      echo "error, empty password";
+    } else { 
+      echo htmlspecialchars($_POST['password']);
+    }
+
+    if(empty($_POST['username'])){
+      echo "error, empty username";
+    } else { 
+      echo htmlspecialchars($_POST['username']);
+    }
+
+    if(empty($_POST['biogrpahy'])){
+      echo "error, empty biography";
+    } else { 
+      echo htmlspecialchars($_POST['biography']);
+    }
+
+    $yearArray = $_POST['year'];
+    foreach($yearArray as $year){
+      echo $year;
+    }
+    $hobbieArray = $_POST['hobbies'];
+    foreach($hobbieArray as $hobbies){
+      echo $hobbies;
+    }
+    $clubArray = $_POST['clubs'];
+    foreach($clubArray as $clubs){
+      echo $clubs;
+    }
+    $sportArray = $_POST['sports'];
+    foreach($sportArray as $sports){
+      echo $sports;
+    }
+    if(!(empty($_POST['instagram']))){
+      echo htmlspecialchars($_POST['instagram']);
+    }
+    if(!empty($_POST['facebook'])){
+      echo htmlspecialchars($_POST['facebook']);
+    }
+    if(!empty($_POST['discord'])){
+      echo htmlspecialchars($_POST['discord']);  
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,15 +92,15 @@
             <!-- <button type="submit">Search</button> -->
         </form>
           <div class="buttons">
-            <a href="index.html"><button class="signup">Home</button></a>
-            <a href="login.html"><button class="login">Log In</button></a>
+            <a href="index.php"><button class="signup">Home</button></a>
+            <a href="login.php"><button class="login">Log In</button></a>
           </div>
         </div>
     </header>  
     <div class = "login-container"> 
         <div class="login-square">
             <h2>Sign Up</h2>
-            <form>
+            <form  method="POST">
               <div class="form-group">
                 <label for="first-name">First Name</label>
                 <input type="text" id="first-name" name="first-name" placeholder="Enter your first name">
@@ -54,44 +129,44 @@
               <div class="form-group">
                 <label for="grade">Year:</label>
                 <div class="checkbox-group">
-                  <label for="year1"><input type="checkbox" id="year1" name="year[]" value="year1"> First</label>
-                  <label for="year2"><input type="checkbox" id="year2" name="year[]" value="year2"> Second</label>
-                  <label for="year3"><input type="checkbox" id="year3" name="year[]" value="year3"> Third</label>
-                  <label for="year4"><input type="checkbox" id="year4" name="year[]" value="year4"> Fourth</label>
-                  <label for="year5"><input type="checkbox" id="year5" name="year[]" value="year5"> Graduate</label>
+                  <label for="year1"><input type="checkbox" id="year1" name="year[]" value="First"> First</label>
+                  <label for="year2"><input type="checkbox" id="year2" name="year[]" value="Second"> Second</label>
+                  <label for="year3"><input type="checkbox" id="year3" name="year[]" value="Thrid"> Third</label>
+                  <label for="year4"><input type="checkbox" id="year4" name="year[]" value="Fourth"> Fourth</label>
+                  <label for="year5"><input type="checkbox" id="year5" name="year[]" value="Graduate"> Graduate</label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="hobbies">Hobbies:</label>
                 <div class="checkbox-group">
-                  <label for="hobby1"><input type="checkbox" id="hobby1" name="hobbies[]" value="hobby1"> Draw</label>
-                  <label for="hobby2"><input type="checkbox" id="hobby2" name="hobbies[]" value="hobby2"> Music</label>
-                  <label for="hobby3"><input type="checkbox" id="hobby3" name="hobbies[]" value="hobby3"> Video Games</label>
-                  <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies[]" value="hobby4"> Movies</label>
-                  <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies[]" value="hobby5"> Cooking</label>
-                  <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies[]" value="hobby6"> Photography</label>
+                  <label for="hobby1"><input type="checkbox" id="hobby1" name="hobbies[]" value="Draw"> Draw</label>
+                  <label for="hobby2"><input type="checkbox" id="hobby2" name="hobbies[]" value="Music"> Music</label>
+                  <label for="hobby3"><input type="checkbox" id="hobby3" name="hobbies[]" value="Video Games"> Video Games</label>
+                  <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies[]" value="Movies"> Movies</label>
+                  <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies[]" value="Cooking"> Cooking</label>
+                  <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies[]" value="Photography"> Photography</label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="clubs">Clubs:</label>
                 <div class="checkbox-group">
-                  <label for="club1"><input type="checkbox" id="club1" name="clubs[]" value="club1"> Coding</label>
-                  <label for="club2"><input type="checkbox" id="club2" name="clubs[]" value="club2"> Trivia</label>
-                  <label for="club3"><input type="checkbox" id="club3" name="clubs[]" value="club3"> LEO</label>
-                  <label for="club4"><input type="checkbox" id="club4" name="clubs[]" value="club4"> Red Cross</label>
-                  <label for="club5"><input type="checkbox" id="club5" name="clubs[]" value="club5"> Esports</label>
-                  <label for="club6"><input type="checkbox" id="club6" name="clubs[]" value="club6"> Science</label>
+                  <label for="club1"><input type="checkbox" id="club1" name="clubs[]" value="Coding"> Coding</label>
+                  <label for="club2"><input type="checkbox" id="club2" name="clubs[]" value="Trivia"> Trivia</label>
+                  <label for="club3"><input type="checkbox" id="club3" name="clubs[]" value="LEO"> LEO</label>
+                  <label for="club4"><input type="checkbox" id="club4" name="clubs[]" value="Red Cross"> Red Cross</label>
+                  <label for="club5"><input type="checkbox" id="club5" name="clubs[]" value="Esports"> Esports</label>
+                  <label for="club6"><input type="checkbox" id="club6" name="clubs[]" value="Science"> Science</label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="sports">Sports:</label>
                 <div class="checkbox-group">
-                  <label for="sport1"><input type="checkbox" id="sport1" name="sports[]" value="sport1"> Golf</label>
-                  <label for="sport2"><input type="checkbox" id="sport2" name="sports[]" value="sport2"> Tennis</label>
-                  <label for="sport3"><input type="checkbox" id="sport3" name="sports[]" value="sport3"> Badminton</label>
-                  <label for="sport4"><input type="checkbox" id="sport4" name="sports[]" value="sport4"> Track</label>
-                  <label for="sport5"><input type="checkbox" id="sport5" name="sports[]" value="sport5"> Swimming</label>
-                  <label for="sport6"><input type="checkbox" id="sport6" name="sports[]" value="sport6"> Hockey</label>
+                  <label for="sport1"><input type="checkbox" id="sport1" name="sports[]" value="Golf"> Golf</label>
+                  <label for="sport2"><input type="checkbox" id="sport2" name="sports[]" value="Tennis"> Tennis</label>
+                  <label for="sport3"><input type="checkbox" id="sport3" name="sports[]" value="Badminton"> Badminton</label>
+                  <label for="sport4"><input type="checkbox" id="sport4" name="sports[]" value="Track"> Track</label>
+                  <label for="sport5"><input type="checkbox" id="sport5" name="sports[]" value="Swimming"> Swimming</label>
+                  <label for="sport6"><input type="checkbox" id="sport6" name="sports[]" value="Hockey"> Hockey</label>
                 </div>
               </div>
               <div class="form-group">
@@ -102,26 +177,26 @@
                     Instagram
                   </label>
                   <div class="checkbox-input">
-                    <input type="text" id="socials-input" placeholder="" disabled>
+                    <input type="text" id="socials-input" name="instagram" placeholder="" disabled>
                   </div>
                   <label>
                     <input type="checkbox" name="socials[]" value="socials 2" onchange="toggleInput(this)">
                     Facebook
                   </label>
                   <div class="checkbox-input">
-                    <input type="text" id="socials2-input" placeholder="" disabled>
+                    <input type="text" id="socials2-input" name="facebook" placeholder="" disabled>
                   </div>
                   <label>
                     <input type="checkbox" name="socials[]" value="socials 3" onchange="toggleInput(this)">
                     Discord
                   </label>
                   <div class="checkbox-input">
-                    <input type="text" id="socials-input" placeholder="" disabled>
+                    <input type="text" id="socials-input" name="discord" placeholder="" disabled>
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <button type="submit">Sign Up</button>
+                <button type="submit" name="submit" value="submit">Sign Up</button>
               </div>
             </form>
           </div>

@@ -15,11 +15,10 @@
           <h1>Website Title</h1>
           <form class="search-form">
             <input type="text" placeholder="Search...">
-            <!-- <button type="submit">Search</button> -->
         </form>
           <div class="buttons">
-            <a href="signup.html"><button class="signup">Sign Up</button></a>
-            <a href="login.html"><button class="login">Log In</button></a>
+            <a href="signup.php"><button class="signup">Sign Up</button></a>
+            <a href="login.php"><button class="login">Log In</button></a>
           </div>
         </div>
     </header>   
@@ -150,117 +149,5 @@
         </div>
       </div>
     </div>
-    <!-- <div class="tab-container">
-        <div class="tab">
-          <button class="tablinks active" onclick="openTab(event, 'grade')">grade</button>
-          <button class="tablinks" onclick="openTab(event, 'club')">club</button>
-          <button class="tablinks" onclick="openTab(event, 'sport')">sport</button>
-          <button class="tablinks" onclick="openTab(event, 'hobby')">hobby</button>
-        </div>          
-        <div class="tabcontent" id="grade">
-            <a href="#" class="profile">
-              <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>GRADES</h3>
-            </a>
-            <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-          </div>
-          <div class="tabcontent" id="club">
-            <a href="#" class="profile">
-              <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>CLUBS</h3>
-            </a>
-            <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-          </div>
-          <div class="tabcontent" id="sport">
-            <a href="#" class="profile">
-              <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>SPORTS</h3>
-            </a>
-            <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-          </div>
-          <div class="tabcontent" id="hobby">
-            <a href="#" class="profile">
-              <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>HOBBY</h3>
-            </a>
-            <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-          </div>
-    </div>-->
 </body>
 </html>
