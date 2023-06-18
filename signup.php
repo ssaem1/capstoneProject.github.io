@@ -1,4 +1,6 @@
 <?php
+
+  $errors = array('email' => '', 'firstName' => '', 'lastName' => '');
    // connect to database
   $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone');
 
@@ -8,36 +10,38 @@
    }
  
  if(isset($_POST['submit'])){
+   $firstName = $_POST['first-name'];
     if(empty($_POST['first-name'])){
       echo "error, empty first name";
     } else { 
-      $firstName = $_POST['first-name'];
       if(!preg_match('/^[a-zA-Z\s]+$/', $firstName)){
-        echo 'first name must be letters and spaces only';
+        $errors['firstName'] = 'first name must be letters and spaces only';
       }
     }
 
+    $lastName = $_POST['last-name'];
     if(empty($_POST['last-name'])){
       echo "error, empty last name";
     } else { 
-      $lastName = $_POST['last-name'];
       if(!preg_match('/^[a-zA-Z\s]+$/', $lastName)){
-        echo 'last name must be letters and spaces only';
+        $errors['lastName'] = 'last name must be letters and spaces only';
       }
     }
 
+    $email = $_POST ['email'];
     if(empty($_POST['email'])){
       echo "error, empty email";
     } else { 
-      $email = $_POST ['email'];
       if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         echo 'Email must be a valid email address';
       }
     }
 
+    $password = $_POST['password'];
     if(empty($_POST['password'])){
       echo "error, empty password";
     } else { 
+      $password = $_POST['password'];
       echo htmlspecialchars($_POST['password']);
     }
 
@@ -47,9 +51,11 @@
       echo htmlspecialchars($_POST['username']);
     }
 
+    $biography = $_POST['biography'];
     if(empty($_POST['biography'])){
       echo "error, empty biography";
     } else { 
+      $biography = $_POST['biography'];
       echo htmlspecialchars($_POST['biography']);
     }
 
@@ -58,15 +64,16 @@
       echo $year;
     }
 
-    echo $_POST['hobbies1'];
-    echo $_POST['hobbies2'];
-    echo $_POST['hobbies3'];
-    echo $_POST['hobbies4'];
+    // echo $_POST['hobbies1'];
+    // echo $_POST['hobbies2'];
+    // echo $_POST['hobbies3'];
+    // echo $_POST['hobbies4'];
 
-    // $hobbieArray = $_POST['hobbies'];
-    // foreach($hobbieArray as $hobbies){
-    //   echo $hobbies;
-    // }
+    $hobbieArray = $_POST['hobbies'];
+    foreach($hobbieArray as $hobbies){
+      echo $hobbies;
+    }
+
     $clubArray = $_POST['clubs'];
     foreach($clubArray as $clubs){
       echo $clubs;
@@ -84,16 +91,23 @@
     if(!empty($_POST['discord'])){
       echo htmlspecialchars($_POST['discord']);  
     }
-  }
 
-  $sql = "INSERT INTO users(first_name, last_name, email, password, biography) VALUES('$firstName', 'lastName', 
-  '$email', 'password', 'biography')";
+    if(array_filter($errors)){
+      echo ' errors in the form';
+    } else {
+  
+      $sql = "INSERT INTO users(first_name, last_name, email, password, biography) VALUES('$firstName', '$lastName', 
+      '$email', '$password', '$biography')";
+    
+      if(mysqli_query($conn, $sql)){
+        // header('Location: index.php');
+      }else{
+        echo 'did not work';
+      }
+  
+    }
+ }
 
-  if(mysqli_query($conn, $sql)){
-    header('Location: index.php');
-  }else{
-    echo 'did not work';
-  }
 ?>
 
 <!DOCTYPE html>
@@ -128,10 +142,12 @@
               <div class="form-group">
                 <label for="first-name">First Name</label>
                 <input type="text" id="first-name" name="first-name" placeholder="Enter your first name">
+                <div><?php echo $errors['firstName'] ?></div> 
               </div>
               <div class="form-group">
                 <label for="last-name">Last Name</label>
                 <input type="text" id="last-name" name="last-name" placeholder="Enter your last name">
+                <div><?php echo $errors['lastName'] ?></div>
               </div>
               <div class="form-group">
                 <label for="username">Username</label>
@@ -140,6 +156,7 @@
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email address">
+                <div><?php echo $errors['email'] ?></div>
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
@@ -163,12 +180,12 @@
               <div class="form-group">
                 <label for="hobbies">Hobbies:</label>
                 <div class="checkbox-group">
-                  <label for="hobby1"><input type="checkbox" id="hobby1" name="hobbies1" value="Draw"> Draw</label>
-                  <label for="hobby2"><input type="checkbox" id="hobby2" name="hobbies2" value="Music"> Music</label>
-                  <label for="hobby3"><input type="checkbox" id="hobby3" name="hobbies3" value="Video Games"> Video Games</label>
-                  <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies4" value="Movies"> Movies</label>
-                  <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies5" value="Cooking"> Cooking</label>
-                  <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies6" value="Photography"> Photography</label>
+                  <label for="hobby1"><input type="checkbox" id="hobby1" name="hobbies[]" value="Draw"> Draw</label>
+                  <label for="hobby2"><input type="checkbox" id="hobby2" name="hobbies[]" value="Music"> Music</label>
+                  <label for="hobby3"><input type="checkbox" id="hobby3" name="hobbies[]" value="Video Games"> Video Games</label>
+                  <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies[]" value="Movies"> Movies</label>
+                  <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies[]" value="Cooking"> Cooking</label>
+                  <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies[]" value="Photography"> Photography</label>
                 </div>
               </div>
               <div class="form-group">

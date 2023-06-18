@@ -8,7 +8,7 @@
     echo 'failed';
   }
 
-  $sql = 'SELECT first_name, last_name, user_id, id, biography FROM users';
+  $sql = 'SELECT first_name, last_name, id, biography FROM users';
 
   $result = mysqli_query($conn, $sql);
 
