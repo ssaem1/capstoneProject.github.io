@@ -1,3 +1,28 @@
+<?php
+
+  // connect to database
+  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone');
+
+  //check connection
+  if(!$conn){
+    echo 'failed';
+  }
+
+  $sql = 'SELECT first_name, last_name, user_id, id, biography FROM users';
+
+  $result = mysqli_query($conn, $sql);
+
+  $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+  // free memory
+  mysqli_free_result($result);
+
+  // close connention
+  mysqli_close($conn);
+
+  print_r($users);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +76,7 @@
           <button class="tablinks" onclick="openTab(event, 'hobby')">hobby</button>
         </div>          
         <div class="tabcontent" id="grade">
-            <a href="grades.html" class="profile">
+            <a href="grades.php" class="profile">
               <img src="images/pfp1.jpg" alt="Profile Image">
               <h3>GRADES</h3>
             </a>

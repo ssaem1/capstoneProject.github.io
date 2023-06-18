@@ -1,5 +1,13 @@
 <?php
-  if(isset($_POST['submit'])){
+   // connect to database
+  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone');
+
+   //check connection
+  if(!$conn){
+     echo 'failed';
+   }
+ 
+ if(isset($_POST['submit'])){
     if(empty($_POST['first-name'])){
       echo "error, empty first name";
     } else { 
@@ -39,7 +47,7 @@
       echo htmlspecialchars($_POST['username']);
     }
 
-    if(empty($_POST['biogrpahy'])){
+    if(empty($_POST['biography'])){
       echo "error, empty biography";
     } else { 
       echo htmlspecialchars($_POST['biography']);
@@ -49,10 +57,16 @@
     foreach($yearArray as $year){
       echo $year;
     }
-    $hobbieArray = $_POST['hobbies'];
-    foreach($hobbieArray as $hobbies){
-      echo $hobbies;
-    }
+
+    echo $_POST['hobbies1'];
+    echo $_POST['hobbies2'];
+    echo $_POST['hobbies3'];
+    echo $_POST['hobbies4'];
+
+    // $hobbieArray = $_POST['hobbies'];
+    // foreach($hobbieArray as $hobbies){
+    //   echo $hobbies;
+    // }
     $clubArray = $_POST['clubs'];
     foreach($clubArray as $clubs){
       echo $clubs;
@@ -71,6 +85,15 @@
       echo htmlspecialchars($_POST['discord']);  
     }
   }
+
+  $sql = "INSERT INTO users(first_name, last_name, email, password, biography) VALUES('$firstName', 'lastName', 
+  '$email', 'password', 'biography')";
+
+  if(mysqli_query($conn, $sql)){
+    header('Location: index.php');
+  }else{
+    echo 'did not work';
+  }
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +107,7 @@
     <title>Document</title>
 </head>
 <body>
+
     <header>
         <div class="header-container">
           <h1>Website Title</h1>
@@ -122,7 +146,7 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password">
               </div>
               <div class="form-group">
-                <label for="confirm-password">Biography</label>
+                <label for="biography">Biography</label>
                 <textarea type="biography" id="biography" name="biography" placeholder="Tell us about yourself"
                  cols="43" rows="10"></textarea>
               </div>
@@ -139,12 +163,12 @@
               <div class="form-group">
                 <label for="hobbies">Hobbies:</label>
                 <div class="checkbox-group">
-                  <label for="hobby1"><input type="checkbox" id="hobby1" name="hobbies[]" value="Draw"> Draw</label>
-                  <label for="hobby2"><input type="checkbox" id="hobby2" name="hobbies[]" value="Music"> Music</label>
-                  <label for="hobby3"><input type="checkbox" id="hobby3" name="hobbies[]" value="Video Games"> Video Games</label>
-                  <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies[]" value="Movies"> Movies</label>
-                  <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies[]" value="Cooking"> Cooking</label>
-                  <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies[]" value="Photography"> Photography</label>
+                  <label for="hobby1"><input type="checkbox" id="hobby1" name="hobbies1" value="Draw"> Draw</label>
+                  <label for="hobby2"><input type="checkbox" id="hobby2" name="hobbies2" value="Music"> Music</label>
+                  <label for="hobby3"><input type="checkbox" id="hobby3" name="hobbies3" value="Video Games"> Video Games</label>
+                  <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies4" value="Movies"> Movies</label>
+                  <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies5" value="Cooking"> Cooking</label>
+                  <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies6" value="Photography"> Photography</label>
                 </div>
               </div>
               <div class="form-group">

@@ -1,3 +1,30 @@
+
+<?php
+
+  // connect to database
+  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone');
+
+  //check connection
+  if(!$conn){
+    echo 'failed';
+  }
+
+  $sql = 'SELECT first_name, last_name, user_id, id, biography FROM users';
+
+  $result = mysqli_query($conn, $sql);
+
+  $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+  // free memory
+  mysqli_free_result($result);
+
+  // close connention
+  mysqli_close($conn);
+
+  print_r($users);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +77,22 @@
       </div>
       <div class="members">
         <div class="profile-container">
-          <div class="profile">
+          <?php foreach($users as $user) { ?>
+            <div class="profile">
+            <img src="images/blue.png" alt="Profile Picture">
+            <div class="profile-details">
+                <h2><?php echo htmlspecialchars($user['first_name'])?><?php echo htmlspecialchars($user['last_name']); ?></h2>
+                <p><?php echo htmlspecialchars($user['biography']); ?></p>
+              <div class="tags">
+                <button class="tag">Tag 1</button>
+                <button class="tag">Tag 2</button>
+                <button class="tag">Tag 3</button>
+              </div>
+            </div>
+          </div>
+          <?php } ?>
+
+          <!-- <div class="profile">
             <img src="images/blue.png" alt="Profile Picture">
             <div class="profile-details">
                 <h2>Name</h2>
@@ -145,7 +187,7 @@
                 <button class="tag">Tag 3</button>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
