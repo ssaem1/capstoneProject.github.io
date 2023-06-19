@@ -64,23 +64,21 @@
       echo $year;
     }
 
-    // echo $_POST['hobbies1'];
-    // echo $_POST['hobbies2'];
-    // echo $_POST['hobbies3'];
-    // echo $_POST['hobbies4'];
-
     $hobbieArray = $_POST['hobbies'];
+    $selectedHobbies = "";
     foreach($hobbieArray as $hobbies){
-      echo $hobbies;
+      $selectedHobbies .= $hobbies . ',';
     }
 
     $clubArray = $_POST['clubs'];
+    $selectedClubs = "";
     foreach($clubArray as $clubs){
-      echo $clubs;
+      $selectedClubs .= $clubs . ',';
     }
     $sportArray = $_POST['sports'];
+    $selectedSports = "";
     foreach($sportArray as $sports){
-      echo $sports;
+      $selectedSports .= $sports . ',';
     }
     if(!(empty($_POST['instagram']))){
       echo htmlspecialchars($_POST['instagram']);
@@ -92,15 +90,47 @@
       echo htmlspecialchars($_POST['discord']);  
     }
 
+    $file = $_FILES['file'];
+    print_r($file);
+    $fileName = $_FILES['file']['name'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $fileSize = $_FILES['file']['size'];
+    $fileError = $_FILES['file']['error'];
+    $fileType = $_FILES['file']['type'];
+
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+
+    $allowed = array('jpg', 'png', 'jpeg');
+
+    $fileDestination = "";
+    if(in_array($fileActualExt, $allowed)){
+      if($fileError === 0){
+        if ($fileSize < 1000000){
+          $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+          $fileDestination = 'uploads/' . $fileNameNew;
+          move_uploaded_file($fileTmpName, $fileDestination);
+          echo "upload Successful";
+        }else{
+          echo "file is too large";
+        }
+      } else {
+        echo "Error, uploading file";
+      }
+    } else {
+      echo "Error, invalid upload type";
+    }
+
+
+
     if(array_filter($errors)){
       echo ' errors in the form';
     } else {
-  
-      $sql = "INSERT INTO users(first_name, last_name, email, password, biography) VALUES('$firstName', '$lastName', 
-      '$email', '$password', '$biography')";
+      $sql = "INSERT INTO users(first_name, last_name, email, password, biography, year, hobbies, clubs, sports, pfp_location)
+       VALUES('$firstName', '$lastName', '$email', '$password', '$biography', '$year', '$selectedHobbies', '$selectedClubs', '$selectedSports', '$fileDestination')";
     
       if(mysqli_query($conn, $sql)){
-        // header('Location: index.php');
+        header('Location: index.php');
       }else{
         echo 'did not work';
       }
@@ -138,7 +168,7 @@
     <div class = "login-container"> 
         <div class="login-square">
             <h2>Sign Up</h2>
-            <form  method="POST">
+            <form method="POST" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="first-name">First Name</label>
                 <input type="text" id="first-name" name="first-name" placeholder="Enter your first name">
@@ -235,6 +265,10 @@
                     <input type="text" id="socials-input" name="discord" placeholder="" disabled>
                   </div>
                 </div>
+              </div>
+              <div class="form-group">
+                <label for="file">Profile picture</label>
+                <input type="file" id="file" name="file">
               </div>
               <div class="form-group">
                 <button type="submit" name="submit" value="submit">Sign Up</button>

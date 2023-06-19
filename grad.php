@@ -9,7 +9,7 @@
     echo 'failed';
   }
 
-  $sql = 'SELECT first_name, last_name, id, biography FROM users';
+  $sql = 'SELECT first_name, last_name, id, biography, year, hobbies, clubs, sports FROM users';
 
   $result = mysqli_query($conn, $sql);
 
@@ -66,7 +66,7 @@
     <div class="content-container">
       <div class="side-bar">
         <div class="description">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ipsum nec odio tincidunt ultricies. Aliquam sed arcu sit amet mi congue lacinia.</p>
+        <p>Grad ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ipsum nec odio tincidunt ultricies. Aliquam sed arcu sit amet mi congue lacinia.</p>
         </div>
         <div class="tabs">
           <button class="tablinks active" onclick="openTab(event, 'grade')">grade</button>
@@ -84,9 +84,21 @@
                 <h2><?php echo htmlspecialchars($user['first_name'])?><?php echo htmlspecialchars($user['last_name']); ?></h2>
                 <p><?php echo htmlspecialchars($user['biography']); ?></p>
               <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
+              <?php $clubs = explode(',',  $user['clubs']); 
+                foreach($clubs as $club) {
+                  if($club != ''){?>
+                <button class="tag"><?php echo "<a href=\"index.php\">" . $club  . "</a>"?></button>
+                <?php }}?>
+              <?php $sports = explode(',',  $user['sports']); 
+                foreach($sports as $sport) {
+                  if($sport != ''){?>
+                <button class="tag"><?php echo "<a href=\"index.php\">" . $sport  . "</a>"?></button>
+                <?php }}?>
+                <?php $hobbies = explode(',',  $user['hobbies']); 
+                foreach($hobbies as $hobbie) {
+                  if($hobbie != ''){?>
+                <button class="tag"><?php echo "<a href=\"index.php\">" . $hobbie  . "</a>"?></button>
+                <?php }}?>
               </div>
             </div>
           </div>

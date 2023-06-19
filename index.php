@@ -8,14 +8,16 @@
     echo 'failed';
   }
 
-  $sql = 'SELECT first_name, last_name, id, biography FROM users';
+  $user_sql = 'SELECT first_name, last_name, id, biography FROM users';
+  $user_result = mysqli_query($conn, $user_sql);
+  $users = mysqli_fetch_all($user_result, MYSQLI_ASSOC);
 
-  $result = mysqli_query($conn, $sql);
-
-  $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+  $year_sql = 'SELECT id, title, description, location, grade_link FROM grade';
+  $year_result = mysqli_query($conn, $year_sql);
+  $years = mysqli_fetch_all($year_result, MYSQLI_ASSOC);
   // free memory
-  mysqli_free_result($result);
+  mysqli_free_result($user_result);
+  mysqli_free_result($year_result);
 
   // close connention
   mysqli_close($conn);
@@ -76,15 +78,16 @@
           <button class="tablinks" onclick="openTab(event, 'hobby')">hobby</button>
         </div>          
         <div class="tabcontent" id="grade">
-            <a href="grades.php" class="profile">
+          <?php foreach($years as $year) {
+            echo "<a href=\"" . $year['grade_link'] . "\" class=\"profile\">"; ?>
               <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>GRADES</h3>
-            </a>
-            <a href="#" class="profile">
+              <h3><?php echo $year['title']; ?></h3>
+              <?php echo "</a>";
+             }?>
+            <!-- <a href="#" class="profile">
               <img src="images/pfp2.png" alt="Profile Image">
               <h3>Jane Smith</h3>
             </a>
-            <!-- Add more profile links as needed -->
             <a href="#" class="profile">
                 <img src="images/pfp3.png" alt="Profile Image">
                 <h3>Jane Smith</h3>
@@ -100,88 +103,7 @@
               <a href="#" class="profile">
                 <img src="images/pfp2.png" alt="Profile Image">
                 <h3>Jane Smith</h3>
-              </a>
-          </div>
-          <div class="tabcontent" id="club">
-            <a href="#" class="profile">
-              <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>CLUBS</h3>
-            </a>
-            <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <!-- Add more profile links as needed -->
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-          </div>
-          <div class="tabcontent" id="sport">
-            <a href="#" class="profile">
-              <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>SPORTS</h3>
-            </a>
-            <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <!-- Add more profile links as needed -->
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-          </div>
-          <div class="tabcontent" id="hobby">
-            <a href="#" class="profile">
-              <img src="images/pfp1.jpg" alt="Profile Image">
-              <h3>HOBBY</h3>
-            </a>
-            <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <!-- Add more profile links as needed -->
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
+              </a> -->
           </div>
     </div>
 </body>
