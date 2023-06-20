@@ -34,3 +34,20 @@ function openTab(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
   }
+
+// POPUP PROF JS
+
+function toggleProfile() {
+  var profileContainer = document.getElementById("profileContainer");
+  var toggleButton = document.getElementById("toggleButton");
+  
+  if (profileContainer.style.display === "none") {
+    profileContainer.style.display = "flex";
+    overlay.style.display = "block";
+    toggleButton.style.display = "none";
+  } else {
+    profileContainer.style.display = "none";
+    overlay.style.display = "none";
+    toggleButton.style.display = "block";
+  }
+}

@@ -9,7 +9,7 @@
     echo 'failed';
   }
 
-  $sql = 'SELECT first_name, last_name, id, biography, year, hobbies, clubs, sports FROM users';
+  $sql = 'SELECT first_name, last_name, id, biography, year, hobbies, clubs, sports, pfp_location FROM users';
 
   $result = mysqli_query($conn, $sql);
 
@@ -31,8 +31,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/grades.css">
-    <script src="js/home.js" defer></script>
+    <link rel="stylesheet" href="../css/grades.css">
+    <script src="../js/home.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <title>Capstone</title>
 </head>
@@ -44,8 +44,8 @@
             <input type="text" placeholder="Search...">
         </form>
           <div class="buttons">
-            <a href="signup.php"><button class="signup">Sign Up</button></a>
-            <a href="login.php"><button class="login">Log In</button></a>
+            <a href="../signup.php"><button class="signup">Sign Up</button></a>
+            <a href="../login.php"><button class="login">Log In</button></a>
           </div>
         </div>
     </header>   
@@ -54,7 +54,7 @@
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
               <!-- Slides -->
-              <div class="swiper-slide"><img src="images/blue.png"></div>
+              <div class="swiper-slide"><img src="../images/blue.png"></div>
               ...
             </div>
             <!-- If we need pagination -->
@@ -66,7 +66,7 @@
     <div class="content-container">
       <div class="side-bar">
         <div class="description">
-        <p>fourth ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ipsum nec odio tincidunt ultricies. Aliquam sed arcu sit amet mi congue lacinia.</p>
+        <p>First ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ipsum nec odio tincidunt ultricies. Aliquam sed arcu sit amet mi congue lacinia.</p>
         </div>
         <div class="tabs">
           <button class="tablinks active" onclick="openTab(event, 'grade')">grade</button>
@@ -77,32 +77,60 @@
       </div>
       <div class="members">
         <div class="profile-container">
-          <?php foreach($users as $user) { ?>
-            <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2><?php echo htmlspecialchars($user['first_name'])?><?php echo htmlspecialchars($user['last_name']); ?></h2>
-                <p><?php echo htmlspecialchars($user['biography']); ?></p>
-              <div class="tags">
-              <?php $clubs = explode(',',  $user['clubs']); 
-                foreach($clubs as $club) {
-                  if($club != ''){?>
-                <button class="tag"><?php echo "<a href=\"index.php\">" . $club  . "</a>"?></button>
-                <?php }}?>
-              <?php $sports = explode(',',  $user['sports']); 
-                foreach($sports as $sport) {
-                  if($sport != ''){?>
-                <button class="tag"><?php echo "<a href=\"index.php\">" . $sport  . "</a>"?></button>
-                <?php }}?>
-                <?php $hobbies = explode(',',  $user['hobbies']); 
-                foreach($hobbies as $hobbie) {
-                  if($hobbie != ''){?>
-                <button class="tag"><?php echo "<a href=\"index.php\">" . $hobbie  . "</a>"?></button>
-                <?php }}?>
+          <?php foreach($users as $user) { 
+            if($user['year'] == "First"){?>
+            <div onclick="toggleProfile()" id="toggleButton" class="profile">
+              <?php echo " <img src=\"../" . $user['pfp_location'] . "\" alt=\"Profile Picture\">"; ?>
+              <div class="profile-details">
+                  <h2><?php echo htmlspecialchars($user['first_name'])?><?php echo htmlspecialchars($user['last_name']); ?></h2>
+                  <p><?php echo htmlspecialchars($user['biography']); ?></p>
+                <div class="tags">
+                  <?php if($user['year'] != ''){?>
+                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $user['year']  . "</a>"?></button>
+                    <?php }?>
+                  <?php $clubs = explode(',',  $user['clubs']); 
+                    foreach($clubs as $club) {
+                      if($club != ''){?>
+                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $club  . "</a>"?></button>
+                    <?php }}?>
+                  <?php $sports = explode(',',  $user['sports']); 
+                    foreach($sports as $sport) {
+                      if($sport != ''){?>
+                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $sport  . "</a>"?></button>
+                    <?php }}?>
+                    <?php $hobbies = explode(',',  $user['hobbies']); 
+                    foreach($hobbies as $hobbie) {
+                      if($hobbie != ''){?>
+                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $hobbie  . "</a>"?></button>
+                    <?php }}?>
+                </div>
+                <div class="popup-profile-container" id="profileContainer">
+                <div class="close-button" onclick="toggleProfile()">&#10006;</div> <!-- Close button at the top right corner -->
+                <div class="popup-profile-picture">
+                  <img src="images/profile-pic.jpg" alt="Profile Picture">
+                </div>
+                <div class="popup-profile-details">
+                  <h2>John Doe</h2>
+                  <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae quam vel ex luctus finibus. Sed id sagittis eros. Phasellus nec malesuada nisl.</p>
+                  <div class="tags">
+                    <span class="tag">Photography</span>
+                    <span class="tag">Travel</span>
+                    <span class="tag">Food</span>
+                  </div>
+                </div>
+                <div class="social-media">
+                  <a href="https://discord.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+                  <a href="https://www.instagram.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                  <a href="https://www.facebook.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                </div>
               </div>
             </div>
           </div>
-          <?php } ?>
+          <?php }}?>
+          
+            <!-- <button onclick="toggleProfile()" id="toggleButton">Toggle Profile</button> Button to toggle the profile visibility -->
+
+
 
           <!-- <div class="profile">
             <img src="images/blue.png" alt="Profile Picture">

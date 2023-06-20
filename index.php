@@ -15,9 +15,25 @@
   $year_sql = 'SELECT id, title, description, location, grade_link FROM grade';
   $year_result = mysqli_query($conn, $year_sql);
   $years = mysqli_fetch_all($year_result, MYSQLI_ASSOC);
+
+  $club_sql = 'SELECT club_id, club_title, club_description, club_location, club_link FROM clubs';
+  $club_result = mysqli_query($conn, $club_sql);
+  $clubs = mysqli_fetch_all($club_result, MYSQLI_ASSOC);
+
+  $sport_sql = 'SELECT sport_id, sport_title, sport_description, sport_location, sport_link FROM sports';
+  $sport_result = mysqli_query($conn, $sport_sql);
+  $sports = mysqli_fetch_all($sport_result, MYSQLI_ASSOC);
+
+  $hobbie_sql = 'SELECT hobbie_id, hobbie_title, hobbie_description, hobbie_location, hobbie_link FROM hobbies';
+  $hobbie_result = mysqli_query($conn, $hobbie_sql);
+  $hobbies = mysqli_fetch_all($hobbie_result, MYSQLI_ASSOC);
   // free memory
   mysqli_free_result($user_result);
   mysqli_free_result($year_result);
+  mysqli_free_result($club_result);
+  mysqli_free_result($sport_result);
+  mysqli_free_result($hobbie_result);
+
 
   // close connention
   mysqli_close($conn);
@@ -79,31 +95,35 @@
         </div>          
         <div class="tabcontent" id="grade">
           <?php foreach($years as $year) {
-            echo "<a href=\"" . $year['grade_link'] . "\" class=\"profile\">"; ?>
+            echo "<a href=\"templates/" . $year['grade_link'] . "\" class=\"profile\">"; ?>
               <img src="images/pfp1.jpg" alt="Profile Image">
               <h3><?php echo $year['title']; ?></h3>
               <?php echo "</a>";
              }?>
-            <!-- <a href="#" class="profile">
-              <img src="images/pfp2.png" alt="Profile Image">
-              <h3>Jane Smith</h3>
-            </a>
-            <a href="#" class="profile">
-                <img src="images/pfp3.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp4.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp1.jpg" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a>
-              <a href="#" class="profile">
-                <img src="images/pfp2.png" alt="Profile Image">
-                <h3>Jane Smith</h3>
-              </a> -->
+          </div>
+          <div class="tabcontent" id="club">
+          <?php foreach($clubs as $club) {
+            echo "<a href=\"" . $club['club_link'] . "\" class=\"profile\">"; ?>
+              <img src="images/pfp1.jpg" alt="Profile Image">
+              <h3><?php echo $club['club_title']; ?></h3>
+              <?php echo "</a>";
+             }?>
+          </div>
+          <div class="tabcontent" id="sport">
+          <?php foreach($sports as $sport) {
+            echo "<a href=\"" . $sport['sport_link'] . "\" class=\"profile\">"; ?>
+              <img src="images/pfp1.jpg" alt="Profile Image">
+              <h3><?php echo $sport['sport_title']; ?></h3>
+              <?php echo "</a>";
+             }?>
+          </div>
+          <div class="tabcontent" id="hobby">
+          <?php foreach($hobbies as $hobbie) {
+            echo "<a href=\"" . $hobbie['hobbie_link'] . "\" class=\"profile\">"; ?>
+              <img src="images/pfp1.jpg" alt="Profile Image">
+              <h3><?php echo $hobbie['hobbie_title']; ?></h3>
+              <?php echo "</a>";
+             }?>
           </div>
     </div>
 </body>
