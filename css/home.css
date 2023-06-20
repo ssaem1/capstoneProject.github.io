@@ -1,12 +1,13 @@
 *{
   margin: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* HEADER CSS*/
 header {
     background-color: lightslategray;
-    padding: 20px 60px;
+    padding: 15px 120px;
     margin: 0px;
   }
   
@@ -22,9 +23,11 @@ header {
   }
   
   .buttons button {
+    font-size: 16px;
     margin-left: 10px;
-    padding: 8px 16px;
+    padding: 12px 20px;
     border: none;
+    border-radius: 15px;
     background-color: transparent;
     color: #fff;
     cursor: pointer;
@@ -152,4 +155,19 @@ header {
   height: 50px;
   border-radius: 20%;
   margin-right: 10px;
+}
+
+.title{
+  display: flex;
+  text-decoration: none;
+  color: white;
+}
+
+.title h2{
+  padding-left: 15px;
+  padding-top: 15px;
+}
+.logo{
+  height: 60px;
+  width: 90px;
 }

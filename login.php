@@ -16,8 +16,7 @@
             <!-- <button type="submit">Search</button> -->
         </form>
           <div class="buttons">
-            <a href="index.php"><button class="signup">Home</button></a>
-            <a href="signup.php"><button class="login">Sign Up</button></a>
+            <a href="index.php"><button class="signup">Add user</button></a>
           </div>
         </div>
     </header>  

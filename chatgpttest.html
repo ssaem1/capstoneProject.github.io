@@ -1,141 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Profile</title>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f2f2f2;
-    }
+    <title>Social Media Handles</title>
+    <style>
+        /* CSS styles */
+        .social-media-list {
+            list-style: none;
+            padding: 0;
+        }
 
-    .popup-profile-container {
-      display: none; /* Initially hide the profile */
-      position: relative;
-      flex-direction: column;
-      align-items: center;
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+        .social-media-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-    .popup-profile-picture img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+        .social-media-icon {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+        }
 
-    .popup-profile-details {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .popup-profile-details h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .popup-profile-details p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .tags .tag {
-      display: inline-block;
-      padding: 4px 8px;
-      margin-right: 10px;
-      background-color: #eee;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .social-media {
-      margin-top: 20px;
-    }
-
-    .social-media a {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-      color: #333;
-      font-size: 20px;
-      line-height: 30px;
-      text-align: center;
-      border-radius: 50%;
-      transition: background-color 0.3s ease;
-    }
-
-    .social-media a:hover {
-      background-color: #eee;
-    }
-
-    .social-media a i {
-      vertical-align: middle;
-    }
-
-    .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #ccc;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .close-button:hover {
-      background-color: #aaa;
-    }
-  </style>
+        .social-media-handle {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <div class="overlay" id="overlay"></div> <!-- Overlay to dim the background -->
-  <button onclick="toggleProfile()" id="toggleButton">Toggle Profile</button> <!-- Button to toggle the profile visibility -->
-  <div class="popup-profile-container" id="profileContainer">
-    <div class="close-button" onclick="toggleProfile()">&#10006;</div> <!-- Close button at the top right corner -->
-    <div class="popup-profile-picture">
-      <img src="images/profile-pic.jpg" alt="Profile Picture">
-    </div>
-    <div class="popup-profile-details">
-      <h2>John Doe</h2>
-      <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae quam vel ex luctus finibus. Sed id sagittis eros. Phasellus nec malesuada nisl.</p>
-      <div class="tags">
-        <span class="tag">Photography</span>
-        <span class="tag">Travel</span>
-        <span class="tag">Food</span>
-      </div>
-    </div>
-    <div class="social-media">
-      <a href="https://discord.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
-      <a href="https://www.instagram.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.facebook.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-    </div>
-  </div>
-
-  <script>
-    function toggleProfile() {
-      var profileContainer = document.getElementById("profileContainer");
-      var toggleButton = document.getElementById("toggleButton");
-      
-      if (profileContainer.style.display === "none") {
-        profileContainer.style.display = "flex";
-        overlay.style.display = "block";
-        toggleButton.style.display = "none";
-      } else {
-        profileContainer.style.display = "none";
-        overlay.style.display = "none";
-        toggleButton.style.display = "block";
-      }
-    }
-  </script>
+    <ul class="social-media-list">
+        <li class="social-media-item">
+            <img src="instagram-icon.png" alt="Instagram Icon" class="social-media-icon">
+            <span class="social-media-handle">my_instagram_handle</span>
+        </li>
+        <li class="social-media-item">
+            <img src="facebook-icon.png" alt="Facebook Icon" class="social-media-icon">
+            <span class="social-media-handle">my_facebook_handle</span>
+        </li>
+        <li class="social-media-item">
+            <img src="discord-icon.png" alt="Discord Icon" class="social-media-icon">
+            <span class="social-media-handle">my_discord_handle</span>
+        </li>
+    </ul>
 </body>
 </html>

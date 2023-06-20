@@ -2,7 +2,7 @@
 
   $errors = array('email' => '', 'firstName' => '', 'lastName' => '');
    // connect to database
-  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone');
+  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone1');
 
    //check connection
   if(!$conn){
@@ -42,13 +42,11 @@
       echo "error, empty password";
     } else { 
       $password = $_POST['password'];
-      echo htmlspecialchars($_POST['password']);
     }
 
     if(empty($_POST['username'])){
       echo "error, empty username";
     } else { 
-      echo htmlspecialchars($_POST['username']);
     }
 
     $biography = $_POST['biography'];
@@ -56,12 +54,11 @@
       echo "error, empty biography";
     } else { 
       $biography = $_POST['biography'];
-      echo htmlspecialchars($_POST['biography']);
     }
 
     $yearArray = $_POST['year'];
     foreach($yearArray as $year){
-      echo $year;
+      
     }
 
     $hobbieArray = $_POST['hobbies'];
@@ -75,23 +72,28 @@
     foreach($clubArray as $clubs){
       $selectedClubs .= $clubs . ',';
     }
+
     $sportArray = $_POST['sports'];
     $selectedSports = "";
     foreach($sportArray as $sports){
       $selectedSports .= $sports . ',';
     }
+
+    $instagram = "";
     if(!(empty($_POST['instagram']))){
-      echo htmlspecialchars($_POST['instagram']);
+      $instagram = $_POST['instagram'];
+
     }
+    $facebook = "";
     if(!empty($_POST['facebook'])){
-      echo htmlspecialchars($_POST['facebook']);
+      $facebook = $_POST['facebook'];
     }
+    $discord = "";
     if(!empty($_POST['discord'])){
-      echo htmlspecialchars($_POST['discord']);  
+      $discord = $_POST['discord']; 
     }
 
     $file = $_FILES['file'];
-    print_r($file);
     $fileName = $_FILES['file']['name'];
     $fileTmpName = $_FILES['file']['tmp_name'];
     $fileSize = $_FILES['file']['size'];
@@ -110,7 +112,6 @@
           $fileNameNew = uniqid('', true) . "." . $fileActualExt;
           $fileDestination = 'uploads/' . $fileNameNew;
           move_uploaded_file($fileTmpName, $fileDestination);
-          echo "upload Successful";
         }else{
           echo "file is too large";
         }
@@ -122,15 +123,16 @@
     }
 
 
+$escapedBiography = mysqli_real_escape_string($conn, $biography);
 
     if(array_filter($errors)){
       echo ' errors in the form';
     } else {
-      $sql = "INSERT INTO users(first_name, last_name, email, password, biography, year, hobbies, clubs, sports, pfp_location)
-       VALUES('$firstName', '$lastName', '$email', '$password', '$biography', '$year', '$selectedHobbies', '$selectedClubs', '$selectedSports', '$fileDestination')";
+      $sql = "INSERT INTO users(first_name, last_name, email, password, biography, year, hobbies, clubs, sports, pfp_location, user_discord, user_instagram, user_facebook)
+       VALUES('$firstName', '$lastName', '$email', '$password', '$escapedBiography', '$year', '$selectedHobbies', '$selectedClubs', '$selectedSports', '$fileDestination', '$discord', '$instagram', '$facebook')";
     
       if(mysqli_query($conn, $sql)){
-        header('Location: index.php');
+        // header('Location: index.php');
       }else{
         echo 'did not work';
       }
@@ -153,15 +155,10 @@
 <body>
 
     <header>
-        <div class="header-container">
-          <h1>Website Title</h1>
-          <form class="search-form">
-            <input type="text" placeholder="Search...">
-            <!-- <button type="submit">Search</button> -->
-        </form>
+    <div class="container">
+          <a class="title" href="index.php"><img class= "logo" src="images/FHlogo.png"> <h2>FH Central</h2></a>  
           <div class="buttons">
-            <a href="index.php"><button class="signup">Home</button></a>
-            <a href="login.php"><button class="login">Log In</button></a>
+
           </div>
         </div>
     </header>  
@@ -198,13 +195,13 @@
                  cols="43" rows="10"></textarea>
               </div>
               <div class="form-group">
-                <label for="grade">Year:</label>
+                <label for="grade">Grade:</label>
                 <div class="checkbox-group">
-                  <label for="year1"><input type="checkbox" id="year1" name="year[]" value="First"> First</label>
-                  <label for="year2"><input type="checkbox" id="year2" name="year[]" value="Second"> Second</label>
-                  <label for="year3"><input type="checkbox" id="year3" name="year[]" value="Thrid"> Third</label>
-                  <label for="year4"><input type="checkbox" id="year4" name="year[]" value="Fourth"> Fourth</label>
-                  <label for="year5"><input type="checkbox" id="year5" name="year[]" value="Graduate"> Graduate</label>
+                  <label for="year1"><input type="checkbox" id="year1" name="year[]" value="Grade 8"> 8</label>
+                  <label for="year2"><input type="checkbox" id="year2" name="year[]" value="Grade 9"> 9</label>
+                  <label for="year3"><input type="checkbox" id="year3" name="year[]" value="Grade 10"> 10</label>
+                  <label for="year4"><input type="checkbox" id="year4" name="year[]" value="Grade 11"> 11</label>
+                  <label for="year5"><input type="checkbox" id="year5" name="year[]" value="Grade 12"> 12</label>
                 </div>
               </div>
               <div class="form-group">
@@ -221,7 +218,7 @@
               <div class="form-group">
                 <label for="clubs">Clubs:</label>
                 <div class="checkbox-group">
-                  <label for="club1"><input type="checkbox" id="club1" name="clubs[]" value="Coding"> Coding</label>
+                  <label for="club1"><input type="checkbox" id="club1" name="clubs[]" value="Environment"> Environment</label>
                   <label for="club2"><input type="checkbox" id="club2" name="clubs[]" value="Trivia"> Trivia</label>
                   <label for="club3"><input type="checkbox" id="club3" name="clubs[]" value="LEO"> LEO</label>
                   <label for="club4"><input type="checkbox" id="club4" name="clubs[]" value="Red Cross"> Red Cross</label>
@@ -244,7 +241,7 @@
                 <label for="socials">Social Media:</label>
                 <div class="socials-group">
                   <label>
-                    <input type="checkbox" name="socials[]" value="socials 1" onchange="toggleInput(this)">
+                    <input type="checkbox" name="socials[]" value="" onchange="toggleInput(this)">
                     Instagram
                   </label>
                   <div class="checkbox-input">

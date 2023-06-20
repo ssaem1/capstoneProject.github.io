@@ -1,7 +1,7 @@
 <?php
 
   // connect to database
-  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone');
+  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone1');
 
   //check connection
   if(!$conn){
@@ -12,19 +12,19 @@
   $user_result = mysqli_query($conn, $user_sql);
   $users = mysqli_fetch_all($user_result, MYSQLI_ASSOC);
 
-  $year_sql = 'SELECT id, title, description, location, grade_link FROM grade';
+  $year_sql = 'SELECT id, title, description, location, grade_link, grade_pfp FROM grade';
   $year_result = mysqli_query($conn, $year_sql);
   $years = mysqli_fetch_all($year_result, MYSQLI_ASSOC);
 
-  $club_sql = 'SELECT club_id, club_title, club_description, club_location, club_link FROM clubs';
+  $club_sql = 'SELECT club_id, club_title, club_description, club_location, club_link, club_pfp FROM clubs';
   $club_result = mysqli_query($conn, $club_sql);
   $clubs = mysqli_fetch_all($club_result, MYSQLI_ASSOC);
 
-  $sport_sql = 'SELECT sport_id, sport_title, sport_description, sport_location, sport_link FROM sports';
+  $sport_sql = 'SELECT sport_id, sport_title, sport_description, sport_location, sport_link, sports_pfp FROM sports';
   $sport_result = mysqli_query($conn, $sport_sql);
   $sports = mysqli_fetch_all($sport_result, MYSQLI_ASSOC);
 
-  $hobbie_sql = 'SELECT hobbie_id, hobbie_title, hobbie_description, hobbie_location, hobbie_link FROM hobbies';
+  $hobbie_sql = 'SELECT hobbie_id, hobbie_title, hobbie_description, hobbie_location, hobbie_link, hobbie_pfp FROM hobbies';
   $hobbie_result = mysqli_query($conn, $hobbie_sql);
   $hobbies = mysqli_fetch_all($hobbie_result, MYSQLI_ASSOC);
   // free memory
@@ -38,7 +38,6 @@
   // close connention
   mysqli_close($conn);
 
-  print_r($users);
 ?>
 
 <!DOCTYPE html>
@@ -54,15 +53,10 @@
 </head>
 <body>
     <header>
-        <div class="container">
-          <h1>Website Title</h1>
-          <form class="search-form">
-            <input type="text" placeholder="Search...">
-            <!-- <button type="submit">Search</button> -->
-        </form>
+    <div class="container">
+          <a class="title" href="index.php"><img class= "logo" src="images/FHlogo.png"> <h2>FH Central</h2></a>  
           <div class="buttons">
-            <a href="signup.php"><button class="signup">Sign Up</button></a>
-            <a href="login.php"><button class="login">Log In</button></a>
+            <a href="signup.php"><button class="signup">Add User</button></a>
           </div>
         </div>
     </header>   
@@ -95,32 +89,32 @@
         </div>          
         <div class="tabcontent" id="grade">
           <?php foreach($years as $year) {
-            echo "<a href=\"templates/" . $year['grade_link'] . "\" class=\"profile\">"; ?>
-              <img src="images/pfp1.jpg" alt="Profile Image">
+            echo "<a href=\"templates/" . $year['grade_link'] . "\" class=\"profile\">"; 
+              echo "<img src=\" images/icons/" . $year['grade_pfp'] .  "\" alt=\"Profile Image\">" ?>
               <h3><?php echo $year['title']; ?></h3>
               <?php echo "</a>";
              }?>
           </div>
           <div class="tabcontent" id="club">
           <?php foreach($clubs as $club) {
-            echo "<a href=\"" . $club['club_link'] . "\" class=\"profile\">"; ?>
-              <img src="images/pfp1.jpg" alt="Profile Image">
+            echo "<a href=\"templates/" . $club['club_link'] . "\" class=\"profile\">"; 
+              echo "<img src=\" images/icons/" . $club['club_pfp'] .  "\" alt=\"Profile Image\">" ?>
               <h3><?php echo $club['club_title']; ?></h3>
               <?php echo "</a>";
              }?>
           </div>
           <div class="tabcontent" id="sport">
           <?php foreach($sports as $sport) {
-            echo "<a href=\"" . $sport['sport_link'] . "\" class=\"profile\">"; ?>
-              <img src="images/pfp1.jpg" alt="Profile Image">
+            echo "<a href=\"templates/" . $sport['sport_link'] . "\" class=\"profile\">"; 
+              echo "<img src=\" images/icons/" . $sport['sports_pfp'] .  "\" alt=\"Profile Image\">" ?>
               <h3><?php echo $sport['sport_title']; ?></h3>
               <?php echo "</a>";
              }?>
           </div>
           <div class="tabcontent" id="hobby">
           <?php foreach($hobbies as $hobbie) {
-            echo "<a href=\"" . $hobbie['hobbie_link'] . "\" class=\"profile\">"; ?>
-              <img src="images/pfp1.jpg" alt="Profile Image">
+            echo "<a href=\"templates/" . $hobbie['hobbie_link'] . "\" class=\"profile\">"; 
+              echo "<img src=\" images/icons/" . $hobbie['hobbie_pfp'] .  "\" alt=\"Profile Image\">" ?>
               <h3><?php echo $hobbie['hobbie_title']; ?></h3>
               <?php echo "</a>";
              }?>

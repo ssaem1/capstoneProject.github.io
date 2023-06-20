@@ -1,13 +1,27 @@
 *{
     margin: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   /* HEADER CSS*/
   header {
       background-color: lightslategray;
-      padding: 20px 60px;
+      padding: 15px 120px;
       margin: 0px;
+      vertical-align: middle;
+    }
+
+    .title{
+      display: inline-flex;
+      text-decoration: none;
+      color: white;
+    }
+
+    .title h2{
+      padding-left: 15px;
+      padding-top: 15px;
+
     }
     
     .container {
@@ -22,16 +36,18 @@
     }
     
     .buttons button {
+      font-size: 16px;
       margin-left: 10px;
-      padding: 8px 16px;
+      padding: 12px 20px;
       border: none;
+      border-radius: 15px;
       background-color: transparent;
       color: #fff;
       cursor: pointer;
     }
     
     .buttons button:hover {
-      background-color: #3367d6;
+      background-color: darkgrey;
     }
   
   /* SWIPER CSS */
@@ -141,7 +157,8 @@
   }
   
   .profile {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
     text-decoration: none;
     color: inherit;
@@ -150,12 +167,21 @@
     border-radius: 10px;
     padding: 20px;
   }
+
+  .profile h2{
+    padding-top: 20px;
+  }
+
+  .profile p{
+    padding: 20px 0;
+  }
   
   .profile-details{
+    text-align: center;
     /* display: grid;
     grid-template-columns: 1fr; */
-    padding-left: 40px;
-    padding-right: 75px;
+    padding: 0 10%;
+    justify-content: center;
   }
   
   .profile:hover{
@@ -163,17 +189,19 @@
     cursor: pointer;
   }
   
-  .profile img {
+  .pfp {
+    justify-content: center;
+    align-items: center;
     width: 100px;
     height: 100px;
-    border-radius: 20%;
-    margin-right: 10px;
+    border-radius: 50%; /* Adjusted border-radius */
+    margin: 0 auto; /* Centered horizontally */
   }
-  
   .tags {
+    padding: 5px 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
   }
 
   .tag {
@@ -183,8 +211,13 @@
     border: none;
     border-radius: 5px;
     font-size: 0.8em;
-    margin-right: 5px;
     margin-bottom: 5px;
+    margin: 5px;
+  }
+
+  .tag a{
+    text-decoration: none;
+    color: black;
   }
 
   /* CONTENT CSS */
@@ -202,6 +235,7 @@
 
   .description {
     padding: 3%;  
+    padding-left: 10%;
     line-height: 1.2;
   }
 
@@ -223,91 +257,54 @@
     background: #fff;
   }
 
-  /* popup image styling */
-  .popup-profile-container {
-    display: none; /* Initially hide the profile */
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+/* social media styling */
+.social-media-list {
+  padding-top: 20px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
 
-  .popup-profile-picture img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .popup-profile-details {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .popup-profile-details h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-
-  .popup-profile-details p {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-
-  .tags .tag {
-    display: inline-block;
-    padding: 4px 8px;
-    margin-right: 10px;
-    background-color: #eee;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-
-  .social-media {
-    margin-top: 20px;
-  }
-
-  .social-media a {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    color: #333;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-  }
-
-  .social-media a:hover {
-    background-color: #eee;
-  }
-
-  .social-media a i {
-    vertical-align: middle;
-  }
-
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: black;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+.social-media-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
+    margin-bottom: 10px;
+}
 
-  .close-button:hover {
-    background-color: #aaa;
-  }
-  
-  .show {
-    display: block;
-  }
+.social-media-icon {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.social-media-handle {
+    font-weight: bold;
+}
+
+
+.side-tabs {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  margin: 0px 10% 0px 10%;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 0px;
+}
+
+.side-tabs:hover{
+  background-color: lightgrey;
+}
+
+.side-tabs img {
+  width: 50px;
+  height: 50px;
+  border-radius: 20%;
+  margin-right: 10px;
+}
+
+.logo{
+  height: 60px;
+  width: 90px;
+}

@@ -2,14 +2,47 @@
 <?php
 
   // connect to database
-  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone');
+  $conn = mysqli_connect('localhost', 'Sam', '1234', 'capstone1');
 
   //check connection
   if(!$conn){
     echo 'failed';
   }
 
-  $sql = 'SELECT first_name, last_name, id, biography, year, hobbies, clubs, sports, pfp_location FROM users';
+  $sql = 'SELECT first_name,
+      last_name,
+      id,
+      biography,
+      year,
+      hobbies, 
+      clubs,
+      sports,
+      pfp_location,
+      user_discord,
+      user_instagram, 
+      user_facebook
+      FROM users';
+
+  $year_sql = 'SELECT id, title, description, cover_photo ,location, grade_link, grade_pfp FROM grade';
+  $year_result = mysqli_query($conn, $year_sql);
+  $years = mysqli_fetch_all($year_result, MYSQLI_ASSOC);
+  mysqli_free_result($year_result);
+
+  $club_sql = 'SELECT club_id, club_title, club_description, club_cover_photo, club_location, club_link, club_pfp FROM clubs';
+  $club_result = mysqli_query($conn, $club_sql);
+  $clubss = mysqli_fetch_all($club_result, MYSQLI_ASSOC);
+  mysqli_free_result($club_result);
+
+  $sport_sql = 'SELECT sport_id, sport_title, sport_description, sport_cover_photo, sport_location, sport_link, sports_pfp FROM sports';
+  $sport_result = mysqli_query($conn, $sport_sql);
+  $sportss = mysqli_fetch_all($sport_result, MYSQLI_ASSOC);
+  mysqli_free_result($sport_result);
+
+  $hobbie_sql = 'SELECT hobbie_id, hobbie_title, hobbie_description, hobbie_cover_photo, hobbie_location, hobbie_link, hobbie_pfp FROM hobbies';
+  $hobbie_result = mysqli_query($conn, $hobbie_sql);
+  $hobbiess = mysqli_fetch_all($hobbie_result, MYSQLI_ASSOC);
+  mysqli_free_result($hobbie_result);
+
 
   $result = mysqli_query($conn, $sql);
 
@@ -21,7 +54,6 @@
   // close connention
   mysqli_close($conn);
 
-  print_r($users);
 ?>
 
 
@@ -39,13 +71,9 @@
 <body>
     <header>
         <div class="container">
-          <h1>Website Title</h1>
-          <form class="search-form">
-            <input type="text" placeholder="Search...">
-        </form>
+          <a class="title" href="../index.php"><img class= "logo" src="../images/FHlogo.png"> <h2>FH Central</h2></a>  
           <div class="buttons">
-            <a href="../signup.php"><button class="signup">Sign Up</button></a>
-            <a href="../login.php"><button class="login">Log In</button></a>
+            <a href="../signup.php"><button class="signup">Add User</button></a>
           </div>
         </div>
     </header>   
@@ -54,180 +82,91 @@
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
               <!-- Slides -->
-              <div class="swiper-slide"><img src="../images/blue.png"></div>
+              <?php 
+              echo "<div class=\"swiper-slide\"><img src=\"../images/cover/" .  $years[0]['cover_photo'] . "\"></div>"; ?>
               ...
             </div>
-            <!-- If we need pagination -->
-            <!-- <div class="swiper-pagination"></div> -->
-          
-            <!-- If we need navigation buttons -->
           </div>
     </div>  
     <div class="content-container">
       <div class="side-bar">
         <div class="description">
-        <p>First ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ipsum nec odio tincidunt ultricies. Aliquam sed arcu sit amet mi congue lacinia.</p>
+          <?php echo "<h1>" . $years[0]['title'] . "</h1>" ?>
+          <?php echo "<p>" . $years[0]['description'] . "</p>"; ?>
         </div>
-        <div class="tabs">
-          <button class="tablinks active" onclick="openTab(event, 'grade')">grade</button>
-          <button class="tablinks" onclick="openTab(event, 'club')">club</button>
-          <button class="tablinks" onclick="openTab(event, 'sport')">sport</button>
-          <button class="tablinks" onclick="openTab(event, 'hobby')">hobby</button>
-        </div>
+        <div class="tabs" id="grade">
+          <?php foreach($years as $year) {
+            echo "<a href=\"../templates/" . $year['grade_link'] . "\" class=\"side-tabs\">"; 
+              echo "<img src=\" ../images/icons/" . $year['grade_pfp'] .  "\" alt=\"Profile Image\">" ?>
+              <h3><?php echo $year['title']; ?></h3>
+              <?php echo "</a>";
+             }?>
+          </div>
       </div>
       <div class="members">
         <div class="profile-container">
           <?php foreach($users as $user) { 
-            if($user['year'] == "First"){?>
-            <div onclick="toggleProfile()" id="toggleButton" class="profile">
-              <?php echo " <img src=\"../" . $user['pfp_location'] . "\" alt=\"Profile Picture\">"; ?>
-              <div class="profile-details">
-                  <h2><?php echo htmlspecialchars($user['first_name'])?><?php echo htmlspecialchars($user['last_name']); ?></h2>
-                  <p><?php echo htmlspecialchars($user['biography']); ?></p>
-                <div class="tags">
-                  <?php if($user['year'] != ''){?>
-                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $user['year']  . "</a>"?></button>
-                    <?php }?>
-                  <?php $clubs = explode(',',  $user['clubs']); 
-                    foreach($clubs as $club) {
-                      if($club != ''){?>
-                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $club  . "</a>"?></button>
-                    <?php }}?>
-                  <?php $sports = explode(',',  $user['sports']); 
-                    foreach($sports as $sport) {
-                      if($sport != ''){?>
-                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $sport  . "</a>"?></button>
-                    <?php }}?>
-                    <?php $hobbies = explode(',',  $user['hobbies']); 
-                    foreach($hobbies as $hobbie) {
-                      if($hobbie != ''){?>
-                    <button class="tag"><?php echo "<a href=\"../index.php\">" . $hobbie  . "</a>"?></button>
-                    <?php }}?>
-                </div>
-                <div class="popup-profile-container" id="profileContainer">
-                <div class="close-button" onclick="toggleProfile()">&#10006;</div> <!-- Close button at the top right corner -->
-                <div class="popup-profile-picture">
-                  <img src="images/profile-pic.jpg" alt="Profile Picture">
-                </div>
-                <div class="popup-profile-details">
-                  <h2>John Doe</h2>
-                  <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae quam vel ex luctus finibus. Sed id sagittis eros. Phasellus nec malesuada nisl.</p>
-                  <div class="tags">
-                    <span class="tag">Photography</span>
-                    <span class="tag">Travel</span>
-                    <span class="tag">Food</span>
-                  </div>
-                </div>
-                <div class="social-media">
-                  <a href="https://discord.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
-                  <a href="https://www.instagram.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                  <a href="https://www.facebook.com/johndoe" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-                </div>
+            if($user['year'] == "Grade 8"){?>
+            <div class="profile">
+            <?php echo " <img class=\"pfp\" src=\"../" . $user['pfp_location'] . "\" alt=\"Profile Picture\">"; ?>
+            <div class="profile-details">
+                <h2><?php echo htmlspecialchars($user['first_name'] . " ")?><?php echo htmlspecialchars($user['last_name']); ?></h2>
+              <div class="tags">
+              <?php if($user['year'] != ''){?>
+                <button class="tag"><?php echo "<a href=\"" . $years[3]['grade_link'] . "\">" . $user['year']  . "</a>"?></button>
+                <?php }?>
+              <?php $clubs = explode(',',  $user['clubs']); 
+                foreach($clubs as $club) {
+                  if($club != ''){
+                    for($i = 0; $i < count($clubss); $i++){
+                      if($clubss[$i]['club_title'] == $club){
+                        echo "<button class=\"tag\"><a href=\"" . $clubss[$i]['club_link'] . "\">" . $club  . "</a></button>";
+                      }
+                    }?>
+                <?php }}?>
+              <?php $sports = explode(',',  $user['sports']); 
+                foreach($sports as $sport) {
+                  if($sport != ''){
+                    for($i = 0; $i < count($sportss); $i++){
+                      if($sportss[$i]['sport_title'] == $sport){
+                        echo "<button class=\"tag\"><a href=\"" . $sportss[$i]['sport_link'] . "\">" . $sport  . "</a></button>";
+                      }
+                    }?>
+                <?php }}?>
+                <?php $hobbies = explode(',',  $user['hobbies']); 
+                foreach($hobbies as $hobbie) {
+                  if($hobbie != ''){
+                    for($i = 0; $i < count($hobbiess); $i++){
+                      if($hobbiess[$i]['hobbie_title'] == $hobbie){
+                        echo "<button class=\"tag\"><a href=\"" . $hobbiess[$i]['hobbie_link'] . "\">" . $hobbie  . "</a></button>";
+                      }
+                    }?>
+                <?php }}?>
               </div>
+              <p><?php echo htmlspecialchars($user['biography']); ?></p>
             </div>
+            <ul class="social-media-list">
+              <?php if(!empty($user['user_instagram'])){ ?>
+              <li class="social-media-item">
+                  <?php echo "<img src=\"../images/instagram-icon.png\" alt=\"Instagram Icon\" class=\"social-media-icon\">";
+                  echo "<span class=\"social-media-handle\">" . $user['user_instagram'] . "</span>"; ?>
+              </li>
+              <?php } ?>
+              <?php if(!empty($user['user_facebook'])){ ?>
+              <li class="social-media-item">
+                  <?php echo "<img src=\"../images/facebook-icon.png\" alt=\"Facebook Icon\" class=\"social-media-icon\">";
+                  echo "<span class=\"social-media-handle\">" . $user['user_facebook'] . "</span>"; ?>
+              </li>
+              <?php } ?>
+              <?php if(!empty($user['user_discord'])){ ?>
+              <li class="social-media-item">
+                  <?php echo "<img src=\"../images/discord-icon.png\" alt=\"Discord Icon\" class=\"social-media-icon\">";
+                  echo "<span class=\"social-media-handle\">" . $user['user_discord'] . "</span>"; ?>
+              </li>
+              <?php } ?>
+            </ul>
           </div>
           <?php }}?>
-          
-            <!-- <button onclick="toggleProfile()" id="toggleButton">Toggle Profile</button> Button to toggle the profile visibility -->
-
-
-
-          <!-- <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <img src="images/blue.png" alt="Profile Picture">
-            <div class="profile-details">
-                <h2>Name</h2>
-                <p>Short description</p>
-              <div class="tags">
-                <button class="tag">Tag 1</button>
-                <button class="tag">Tag 2</button>
-                <button class="tag">Tag 3</button>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
