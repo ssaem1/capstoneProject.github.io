@@ -132,7 +132,7 @@ $escapedBiography = mysqli_real_escape_string($conn, $biography);
        VALUES('$firstName', '$lastName', '$email', '$password', '$escapedBiography', '$year', '$selectedHobbies', '$selectedClubs', '$selectedSports', '$fileDestination', '$discord', '$instagram', '$facebook')";
     
       if(mysqli_query($conn, $sql)){
-        // header('Location: index.php');
+        header('Location: index.php');
       }else{
         echo 'did not work';
       }
@@ -213,6 +213,8 @@ $escapedBiography = mysqli_real_escape_string($conn, $biography);
                   <label for="hobby4"><input type="checkbox" id="hobby4" name="hobbies[]" value="Movies"> Movies</label>
                   <label for="hobby5"><input type="checkbox" id="hobby5" name="hobbies[]" value="Cooking"> Cooking</label>
                   <label for="hobby6"><input type="checkbox" id="hobby6" name="hobbies[]" value="Photography"> Photography</label>
+                  <label for="hobby7"><input type="checkbox" id="hobby7" name="hobbies[]" value="Guitar"> Guitar</label>
+                  <label for="hobby8"><input type="checkbox" id="hobby8" name="hobbies[]" value="Poem"> Poem</label>
                 </div>
               </div>
               <div class="form-group">
@@ -273,5 +275,7 @@ $escapedBiography = mysqli_real_escape_string($conn, $biography);
             </form>
           </div>
     </div> 
+    <div class="footer">
+  </div>
 </body>
 </html>

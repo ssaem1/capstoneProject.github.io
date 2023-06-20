@@ -30,7 +30,7 @@ body {
   }
 
   .login-square {
-    width: 30%;
+    width: 40%;
     padding: 40px;
     background-color: #ffffff;
     border-radius: 5px;
@@ -161,4 +161,11 @@ header {
   .logo{
     height: 60px;
     width: 90px;
+  }
+
+  .footer {
+    background-color: lightslategray;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
   }
